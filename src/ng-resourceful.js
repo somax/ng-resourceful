@@ -25,6 +25,9 @@
                     'add': {
                         value: _add
                     },
+                    'update': {
+                        value: _update
+                    },
                     'delete': {
                         value: _delete
                     },
@@ -54,7 +57,13 @@
             }
 
             function _add(_newData) {
-                return $http.post(_uri, _newData).success(function(_data) {
+                return $http.post(_uri, _newData).then(function(_data) {
+                    // 
+                });
+            }
+
+            function _update(_newData) {
+                return $http.put(_uri, _newData).then(function(_data) {
                     // 
                 });
             }
