@@ -1,6 +1,6 @@
 	angular.module('demoApp', ['ngResourceful'])
         .factory('ResrOrgs', ResrOrgs)
-        .controller('mainController', mainController)
+        .controller('mainController', mainController);
 
 	function ResrOrgs(Resourceful) {
 		return new Resourceful({ 
@@ -25,11 +25,13 @@
             if(!org.isResource){
                 Resourceful({target:org, uri:'/api/orgs/'+org.id})
             }
-            console.log(org)
+
             org.get().then(function(){
-                console.log('>>>',org);
+                console.log(org);
+                mc.currentOrg = org;
             })
 
         }
 
  	}
+    mainController.$injector = ['ResrOrgs','Resourceful'];

@@ -1,3 +1,4 @@
+// mock data
 const orgs = [{
     "id": 1,
     "name": "org1"
@@ -11,13 +12,13 @@ const orgs = [{
 
 const fs = require('fs');
 const server = require('http').createServer((req, res) => {
-    if (req.url == '/api/orgs') {
+    if (req.url === '/api/orgs') {
         res.end(JSON.stringify(orgs));
     } else if (/^\/api\/orgs\//.test(req.url)) {
         res.end(JSON.stringify(orgs[req.url.replace('\/api/orgs/', '')]))
     } else {
         let file;
-        let url = (req.url == '/') ? './index.html' : '.' + req.url
+        let url = (req.url === '/') ? './index.html' : '.' + req.url
         try {
             file = fs.readFileSync(url)
         } catch (err) {
@@ -26,11 +27,6 @@ const server = require('http').createServer((req, res) => {
         }
         res.end(file);
     }
-
-
-
-
-
 })
 
 server.listen(8888);
